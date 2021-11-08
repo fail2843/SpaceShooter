@@ -1,43 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace SpaceShooter
 {
     internal sealed class GameController : MonoBehaviour
-    {
-        [SerializeField] private float _asterodSpawnDelay;
+    {        
         [SerializeField] private Transform _playerSpawnPoint;
-        [SerializeField] private Transform[] _enemySpawnPoints;//Временно не используется 
-        [SerializeField] private Transform _asteroidSpawnPoints;
-        [SerializeField] private float _asteroidRate;
+        //[SerializeField] private Transform[] _enemySpawnPoints;//Временно не используется 
+        [SerializeField] private Transform[] _asteroidSpawnPoints;
+
+        [SerializeField] private float _asteroidSpeed;
+        [SerializeField] private float _asteroidSpawnDelay;
 
 
-        private float _timer;
+        private float _timer = 0;
 
-        private References _references;
-        private void Awake()
+        private void Start()
         {
-            _references = new References();           
+           Instantiate(Resources.Load("Player"),_playerSpawnPoint.position, Quaternion.identity);
         }
-        void Start()
-        {
-            _references.player = Instantiate(Resources.Load("Player"),_playerSpawnPoint.position, Quaternion.identity) as GameObject;
-            var asteroid = EnemyObjects.CreateAsteroid(new Health(50f, 50f), _asteroidSpawnPoints);
-
+        private void Update()
+        {    
+            spawnAsteroidsField();//Реализовано через таймер временно. Пока что просто чтобы работало
         }
-        void Update()
-        {
-           
-            StartCoroutine(spawnAsteroidsField());
-
-            Debug.LogWarning("Upd");
-
-        }
-        private IEnumerator spawnAsteroidsField()
+        private void spawnAsteroidsField()
         {
             _timer += Time.deltaTime;
-            Debug.Log(_timer);
-            yield return null;
+            if (_timer >= _asteroidSpawnDelay)
+            {
+                var index = Random.Range(0, _asteroidSpawnPoints.Length);
+                var asteroid = EnemyObjects.CreateAsteroid(new Health(50f, 50f), _asteroidSpawnPoints[index]);
+                asteroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _asteroidSpeed);
+                _timer = 0;
+            }
         }
     }
 }
