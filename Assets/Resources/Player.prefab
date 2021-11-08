@@ -136,4 +136,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 100
   _attackDamage: 0
-  _speed: 100
+  _speed: 150

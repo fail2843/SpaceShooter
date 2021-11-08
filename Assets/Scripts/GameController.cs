@@ -28,7 +28,7 @@ namespace SpaceShooter
             {
                 var index = Random.Range(0, _asteroidSpawnPoints.Length);
                 var asteroid = EnemyObjects.CreateAsteroid(new Health(50f, 50f), _asteroidSpawnPoints[index]);
-                asteroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _asteroidSpeed);
+                asteroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _asteroidSpeed * Time.fixedDeltaTime);
                 _timer = 0;
             }
         }
