@@ -8,6 +8,5 @@ namespace SpaceShooter
     {
         protected override void Death() => Destroy(gameObject);
         
-
     }
 }

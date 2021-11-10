@@ -4,15 +4,18 @@ namespace SpaceShooter
     internal sealed class GameController : MonoBehaviour
     {        
         [SerializeField] private Transform _playerSpawnPoint;
-        //[SerializeField] private Transform[] _enemySpawnPoints;//Временно не используется 
+        
         [SerializeField] private Transform[] _asteroidSpawnPoints;
-
         [SerializeField] private float _asteroidSpeed;
         [SerializeField] private float _asteroidSpawnDelay;
 
+        [SerializeField] private Transform _enemySpawnPoint;
+        [SerializeField] private float _enemyShipSpeed;
+        [SerializeField] private int _maxEnemyShips;
+
 
         private float _timer = 0;
-
+        private int _amountActiveEnemyShips = 0;
         private void Start()
         {
            Instantiate(Resources.Load("Player"),_playerSpawnPoint.position, Quaternion.identity);
@@ -20,6 +23,7 @@ namespace SpaceShooter
         private void Update()
         {    
             spawnAsteroidsField();//Реализовано через таймер временно. Пока что просто чтобы работало
+            //spawnEnemyShips();
         }
         private void spawnAsteroidsField()
         {
@@ -30,6 +34,16 @@ namespace SpaceShooter
                 var asteroid = EnemyObjects.CreateAsteroid(new Health(50f, 50f), _asteroidSpawnPoints[index]);
                 asteroid.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _asteroidSpeed * Time.fixedDeltaTime);
                 _timer = 0;
+            }
+        }
+        private void spawnEnemyShips()
+        {
+            //Было написано для проверки. Механизм создания противника будет переписан
+            if (_amountActiveEnemyShips < _maxEnemyShips)
+            {
+                var enemy = EnemyObjects.CreateEnemyShip(new Health(50f, 50f), _enemySpawnPoint);
+                enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.down * _enemyShipSpeed * Time.fixedDeltaTime);
+                _amountActiveEnemyShips++;
             }
         }
     }
