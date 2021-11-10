@@ -16,6 +16,12 @@ namespace SpaceShooter
             enemy.Health = hp;
             enemy.Death();
             return enemy;
-        }  
+        }
+        public static EnemyShip CreateEnemyShip(Health hp, Transform position)
+        {           
+            var enemy = Instantiate(Resources.Load<EnemyShip>("EnemyShip"), position);
+            enemy.Health = hp;
+            return enemy;
+        }
     }
 }
