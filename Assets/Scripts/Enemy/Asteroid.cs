@@ -1,11 +1,14 @@
 namespace SpaceShooter
 {
-    internal sealed class Asteroid : EnemyObjects
+    internal sealed class Asteroid : EnemyObjectsFabric
     {
-        private float _deathTime = 2f;
+        protected override void Damage()
+        {
+            
+        }
         protected override void Death()
         {
-            Destroy(gameObject, _deathTime);
+            Destroy(gameObject, deathTime);
         }
     }
 }

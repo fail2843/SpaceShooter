@@ -359,15 +359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerSpawnPoint: {fileID: 409909282}
-  _asteroidSpawnPoints:
-  - {fileID: 224876049}
-  - {fileID: 472415348}
-  - {fileID: 932474641}
-  _asteroidSpeed: 100
-  _asteroidSpawnDelay: 2
-  _enemySpawnPoint: {fileID: 1234424077}
-  _enemyShipSpeed: 1
-  _maxEnemyShips: 1
 --- !u!4 &694773237
 Transform:
   m_ObjectHideFlags: 0
