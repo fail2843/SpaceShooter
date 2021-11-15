@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 namespace SpaceShooter
 {
 
-    internal sealed class EnemyShip:EnemyObjects
+    internal sealed class EnemyShip:EnemyObjectsFabric
     {
         protected override void Death() => Destroy(gameObject);
+        protected override void Damage()
+        {
+
+        }
         
     }
 }

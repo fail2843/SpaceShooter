@@ -1,18 +1,19 @@
 using UnityEngine;
 namespace SpaceShooter
 {
-    internal sealed class InputManager
+    //Получет информацию о вводе
+    internal static class InputManager
     {
-        internal float vertical;
-        internal float horizontal;
-        internal bool fireButtonDown;
-        internal void GetAllInput()
+        internal static float Vertical { get; private set; }
+        internal static float Horizontal { get; private set; }
+        internal static bool FireButtonDown { get; private set; }
+        internal static void GetAllInput()
         {
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            Horizontal = Input.GetAxis("Horizontal");
+            Vertical = Input.GetAxis("Vertical");
 
-            if (Input.GetButtonDown("Fire1")) fireButtonDown = true;
-            else fireButtonDown = false;
+            if (Input.GetButtonDown("Fire1")) FireButtonDown = true;
+            else FireButtonDown = false;
         }
     }
 }
